@@ -76,8 +76,7 @@ function App() {
             </div>
           </div>
         </div>
-
-        {/* Dodatkowe testy klas Tailwind */}
+      
         <div className="mt-12 space-y-6">
           <div className="card">
             <h3 className="text-xl font-semibold text-text mb-4">Test kolorów Samsung</h3>
