@@ -1,0 +1,43 @@
+# Conventional Commits - Szablon wiadomości commitów
+
+# Typy commitów:
+# feat:     Nowa funkcjonalność
+# fix:      Poprawka błędu
+# docs:     Zmiany w dokumentacji
+# style:    Zmiany formatowania (nie wpływają na działanie)
+# refactor: Refaktoryzacja kodu
+# perf:     Poprawa wydajności
+# test:     Dodanie lub poprawa testów
+# chore:    Zadania konserwacyjne
+# ci:       Zmiany w CI/CD
+# build:    Zmiany w systemie budowania
+# revert:   Cofnięcie poprzedniego commita
+
+# Przykłady:
+# feat: add user authentication system
+# fix: resolve navigation bug in mobile view
+# docs: update README with installation steps
+# style: format code according to prettier rules
+# refactor: extract user validation logic
+# perf: optimize image loading performance
+# test: add unit tests for user service
+# chore: update dependencies to latest versions
+# ci: add GitHub Actions workflow
+# build: configure webpack optimization
+# revert: revert "feat: add user authentication system"
+
+# Format:
+# <type>(<scope>): <description>
+# 
+# [optional body]
+# 
+# [optional footer(s)]
+
+# Przykład z body i footer:
+# feat(auth): implement JWT token system
+# 
+# This commit adds JWT-based authentication to the application.
+# Users can now login and receive secure tokens for API access.
+# 
+# Closes #123
+# Breaking Change: removes old session-based auth
