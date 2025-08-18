@@ -6,7 +6,7 @@
   html {
     font-family: 'SamsungOne', system-ui, sans-serif;
   }
-  
+
   body {
     @apply bg-background text-text;
   }
@@ -16,11 +16,11 @@
   .btn-primary {
     @apply bg-green hover:bg-green/90 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
   }
-  
+
   .btn-secondary {
     @apply bg-lightText/20 hover:bg-lightText/30 text-text font-medium py-2 px-4 rounded-lg transition-colors duration-200;
   }
-  
+
   .card {
     @apply bg-white rounded-xl shadow-sm border border-lightText/20 p-6;
   }
