@@ -167,7 +167,7 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
                 <div className="flex items-center justify-between">
                   <span>
                     {filters.functions === 'all'
-                      ? 'Pokaż wszystkie'
+                      ? 'Pokaż Wszystkie'
                       : filters.functions === 'addwash'
                         ? 'Drzwi AddWash'
                         : filters.functions === 'ai-control'
@@ -188,6 +188,15 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
 
               {openDropdowns.functions && (
                 <ul className="absolute top-full left-0 right-0 bg-white shadow-lg z-10 mt-1">
+                  <li
+                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      updateFilter('functions', 'all');
+                      toggleDropdown('functions');
+                    }}
+                  >
+                    Wszystkie
+                  </li>
                   <li
                     className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
                     onClick={() => {
@@ -241,7 +250,7 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
                 <div className="flex items-center justify-between">
                   <span>
                     {filters.energyClass === 'all'
-                      ? 'Pokaż wszystkie'
+                      ? 'Pokaż Wszystkie'
                       : filters.energyClass === 'A'
                         ? 'A'
                         : filters.energyClass === 'B'
@@ -260,6 +269,15 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
 
               {openDropdowns.energyClass && (
                 <ul className="absolute top-full left-0 right-0 bg-white shadow-lg z-10 mt-1">
+                  <li
+                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      updateFilter('energyClass', 'all');
+                      toggleDropdown('energyClass');
+                    }}
+                  >
+                    Wszystkie
+                  </li>
                   <li
                     className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
                     onClick={() => {
@@ -323,6 +341,15 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
 
               {openDropdowns.capacity && (
                 <ul className="absolute top-full left-0 right-0 bg-white shadow-lg z-10 mt-1">
+                  <li
+                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      updateFilter('capacity', 'all');
+                      toggleDropdown('capacity');
+                    }}
+                  >
+                    Wszystkie
+                  </li>
                   <li
                     className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
                     onClick={() => {
