@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import { ProductCard } from './ProductCard.component';
 
 interface Product {
@@ -58,6 +58,12 @@ const NoResults: React.FC = memo(() => (
 NoResults.displayName = 'NoResults';
 
 export const Products: React.FC<ProductsProps> = memo(({ products }) => {
+  const [selectedProductId, setSelectedProductId] = useState<string>('3'); // Domyślnie trzecia pralka jest wybrana
+
+  const handleProductSelect = (productId: string) => {
+    setSelectedProductId(productId);
+  };
+
   if (products.length === 0) {
     return (
       <section className="w-full bg-background py-6 px-4">
@@ -73,7 +79,12 @@ export const Products: React.FC<ProductsProps> = memo(({ products }) => {
       <div className="container mx-auto max-w-6xl">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map(product => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              isSelected={product.id === selectedProductId}
+              onSelect={() => handleProductSelect(product.id)}
+            />
           ))}
         </div>
         <div className="w-full flex justify-center items-center mt-8 mb-8">

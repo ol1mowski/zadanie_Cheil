@@ -26,9 +26,15 @@ interface ProductCardProps {
     };
     image: string;
   };
+  isSelected: boolean;
+  onSelect: () => void;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({
+  product,
+  isSelected,
+  onSelect,
+}) => {
   const formatPrice = (amount: number) => {
     const mainPart = Math.floor(amount);
     const cents = Math.round((amount - mainPart) * 100);
@@ -123,8 +129,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       </div>
 
       <div className="flex justify-center">
-        <button className="w-32 bg-darkBlue text-white py-3 px-4 rounded-xl hover:bg-darkBlue/90 transition-colors duration-200 uppercase tracking-[0.15em] cursor-pointer text-sm">
-          Wybierz
+        <button
+          onClick={onSelect}
+          className={`w-32 py-3 px-4 rounded-xl transition-colors duration-200 uppercase tracking-[0.15em] cursor-pointer text-sm ${
+            isSelected
+              ? 'bg-dark text-white hover:bg-dark/90'
+              : 'bg-darkBlue text-white hover:bg-darkBlue/90'
+          }`}
+        >
+          {isSelected ? 'Wybrane' : 'Wybierz'}
         </button>
       </div>
     </div>

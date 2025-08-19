@@ -21,6 +21,7 @@ export interface Product {
     };
   };
   image: string;
+  buttonColor?: 'darkBlue' | 'dark';
 }
 
 export const sampleProducts: Product[] = [
@@ -81,6 +82,7 @@ export const sampleProducts: Product[] = [
       },
     },
     image: '/src/assets/waschMaschine.png',
+    buttonColor: 'dark',
   },
   {
     id: '3',
@@ -110,6 +112,7 @@ export const sampleProducts: Product[] = [
       },
     },
     image: '/src/assets/waschMaschine.png',
+    buttonColor: 'dark',
   },
   {
     id: '4',
