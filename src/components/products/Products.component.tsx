@@ -28,23 +28,15 @@ interface Product {
 
 interface ProductsProps {
   products: Product[];
-  onProductSelect: (productId: string) => void;
 }
 
-export const Products: React.FC<ProductsProps> = ({
-  products,
-  onProductSelect,
-}) => {
+export const Products: React.FC<ProductsProps> = ({ products }) => {
   return (
     <section className="w-full bg-background py-6 px-4">
       <div className="container mx-auto max-w-6xl">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map(product => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onSelect={onProductSelect}
-            />
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
         <div className="w-full flex justify-center items-center mt-8 mb-8">

@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFilters } from './hooks/useFilters.hook';
 import arrowIcon from '@/assets/arrow.svg';
+import type { Product } from '@/data/products.data';
 
-export const FilterSection: React.FC = () => {
-  const { filters, updateFilter } = useFilters();
+interface FilterSectionProps {
+  products: Product[];
+  onFiltersChange: (filteredProducts: Product[]) => void;
+}
+
+export const FilterSection: React.FC<FilterSectionProps> = ({
+  products,
+  onFiltersChange,
+}) => {
+  const { filters, updateFilter, filterAndSortProducts } = useFilters();
+
+  useEffect(() => {
+    const filteredProducts = filterAndSortProducts(products);
+    onFiltersChange(filteredProducts);
+  }, [filters, products, filterAndSortProducts, onFiltersChange]);
 
   return (
     <section className="w-full bg-background py-6 px-4">

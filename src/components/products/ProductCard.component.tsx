@@ -25,13 +25,9 @@ interface ProductCardProps {
     };
     image: string;
   };
-  onSelect: (productId: string) => void;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({
-  product,
-  onSelect,
-}) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const formatPrice = (amount: number) => {
     const mainPart = Math.floor(amount);
     const cents = Math.round((amount - mainPart) * 100);
@@ -121,10 +117,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       </div>
 
       <div className="flex justify-center">
-        <button
-          onClick={() => onSelect(product.id)}
-          className="w-32 bg-darkBlue text-white py-3 px-4 rounded-xl hover:bg-darkBlue/90 transition-colors duration-200 uppercase tracking-[0.15em] cursor-pointer text-sm"
-        >
+        <button className="w-32 bg-darkBlue text-white py-3 px-4 rounded-xl hover:bg-darkBlue/90 transition-colors duration-200 uppercase tracking-[0.15em] cursor-pointer text-sm">
           Wybierz
         </button>
       </div>
