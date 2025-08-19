@@ -1,7 +1,8 @@
 import React from 'react';
 import { useFilters } from './hooks/useFilters.hook';
+import arrowIcon from '@/assets/arrow.svg';
 
-const FilterSection: React.FC = () => {
+export const FilterSection: React.FC = () => {
   const { filters, updateFilter } = useFilters();
 
   return (
@@ -12,7 +13,7 @@ const FilterSection: React.FC = () => {
             <input
               type="text"
               placeholder="Search..."
-              className="w-full px-3 py-2 bg-white rounded-lg text-sm text-text placeholder-lightText focus:outline-none focus:ring-2 focus:ring-lightBlue/50 transition-all duration-200 will-change-transform"
+              className="w-full px-3 py-2 bg-white rounded-lg text-sm text-text placeholder-lightText focus:outline-none focus:ring-2 transition-all duration-200 will-change-transform"
               value={filters.search}
               onChange={e => updateFilter('search', e.target.value)}
             />
@@ -24,73 +25,157 @@ const FilterSection: React.FC = () => {
             <label className="block text-sm font-bold text-text">
               Sortuj po:
             </label>
-            <select
-              className="w-full px-3 py-2 bg-white border border-lightText/30 rounded-lg text-text focus:outline-none focus:ring-2 focus:ring-lightBlue/50 focus:border-lightBlue transition-all duration-200 appearance-none cursor-pointer hover:bg-lightText/5 will-change-transform"
-              value={filters.sortBy}
-              onChange={e => updateFilter('sortBy', e.target.value)}
-            >
-              <option value="popularity">Popularność</option>
-              <option value="all">Wszystkie</option>
-              <option value="price">Cena</option>
-              <option value="capacity">Pojemność</option>
-            </select>
+            <div className="relative">
+              <select
+                className="w-full px-3 py-2 bg-white text-text focus:outline-none transition-all duration-200 appearance-none cursor-pointer will-change-transform pr-8 shadow-sm font-sans border-none"
+                value={filters.sortBy}
+                onChange={e => updateFilter('sortBy', e.target.value)}
+              >
+                <option
+                  value="popularity"
+                  className="bg-white text-text font-sans"
+                >
+                  Popularność
+                </option>
+                <option value="all" className="bg-white text-text font-sans">
+                  Wszystkie
+                </option>
+                <option value="price" className="bg-white text-text font-sans">
+                  Cena
+                </option>
+                <option
+                  value="capacity"
+                  className="bg-white text-text font-sans"
+                >
+                  Pojemność
+                </option>
+              </select>
+              <img
+                src={arrowIcon}
+                alt="dropdown arrow"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
+              />
+            </div>
           </div>
 
           <div className="space-y-2">
             <label className="block text-sm font-bold text-text">
               Funkcje:
             </label>
-            <select
-              className="w-full px-3 py-2 bg-white border border-lightText/30 rounded-lg text-text focus:outline-none focus:ring-2 focus:ring-lightBlue/50 focus:border-lightBlue transition-all duration-200 appearance-none cursor-pointer hover:bg-lightText/5 will-change-transform"
-              value={filters.functions}
-              onChange={e => updateFilter('functions', e.target.value)}
-            >
-              <option value="all">Pokaż wszystkie</option>
-              <option value="all">Wszystkie</option>
-              <option value="addwash">Drzwi AddWash</option>
-              <option value="ai-control">Panel AI Control</option>
-              <option value="inverter">Silnik inwerterowy</option>
-              <option value="display">Wyświetlacz elektroniczny</option>
-            </select>
+            <div className="relative">
+              <select
+                className="w-full px-3 py-2 bg-white text-text focus:outline-none transition-all duration-200 appearance-none cursor-pointer will-change-transform pr-8 shadow-sm font-sans"
+                value={filters.functions}
+                onChange={e => updateFilter('functions', e.target.value)}
+              >
+                <option value="all" className="bg-white text-text font-sans">
+                  Pokaż wszystkie
+                </option>
+                <option value="all" className="bg-white text-text font-sans">
+                  Wszystkie
+                </option>
+                <option
+                  value="addwash"
+                  className="bg-white text-text font-sans"
+                >
+                  Drzwi AddWash
+                </option>
+                <option
+                  value="ai-control"
+                  className="bg-white text-text font-sans"
+                >
+                  Panel AI Control
+                </option>
+                <option
+                  value="inverter"
+                  className="bg-white text-text font-sans"
+                >
+                  Silnik inwerterowy
+                </option>
+                <option
+                  value="display"
+                  className="bg-white text-text font-sans"
+                >
+                  Wyświetlacz elektroniczny
+                </option>
+              </select>
+              <img
+                src={arrowIcon}
+                alt="dropdown arrow"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
+              />
+            </div>
           </div>
 
           <div className="space-y-2">
             <label className="block text-sm font-bold text-text">
               Klasa energetyczna:
             </label>
-            <select
-              className="w-full px-3 py-2 bg-white border border-lightText/30 rounded-lg text-text focus:outline-none focus:ring-2 focus:ring-lightBlue/50 focus:border-lightBlue transition-all duration-200 appearance-none cursor-pointer hover:bg-lightText/5 will-change-transform"
-              value={filters.energyClass}
-              onChange={e => updateFilter('energyClass', e.target.value)}
-            >
-              <option value="all">Pokaż wszystkie</option>
-              <option value="all">Wszystkie</option>
-              <option value="A">A</option>
-              <option value="B">B</option>
-              <option value="D">D</option>
-            </select>
+            <div className="relative">
+              <select
+                className="w-full px-3 py-2 bg-white text-text focus:outline-none transition-all duration-200 appearance-none cursor-pointer will-change-transform pr-8 shadow-sm font-sans"
+                value={filters.energyClass}
+                onChange={e => updateFilter('energyClass', e.target.value)}
+              >
+                <option value="all" className="bg-white text-text font-sans">
+                  Pokaż wszystkie
+                </option>
+                <option value="all" className="bg-white text-text font-sans">
+                  Wszystkie
+                </option>
+                <option value="A" className="bg-white text-text font-sans">
+                  A
+                </option>
+                <option value="B" className="bg-white text-text font-sans">
+                  B
+                </option>
+                <option value="D" className="bg-white text-text font-sans">
+                  D
+                </option>
+              </select>
+              <img
+                src={arrowIcon}
+                alt="dropdown arrow"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
+              />
+            </div>
           </div>
 
           <div className="space-y-2">
             <label className="block text-sm font-bold text-text">
               Pojemność:
             </label>
-            <select
-              className="w-full px-3 py-2 bg-white border border-lightText/30 rounded-lg text-text focus:outline-none focus:ring-2 focus:ring-lightBlue/50 focus:border-lightBlue transition-all duration-200 appearance-none cursor-pointer hover:bg-lightText/5 will-change-transform"
-              value={filters.capacity}
-              onChange={e => updateFilter('capacity', e.target.value)}
-            >
-              <option value="all">Pokaż wszystkie</option>
-              <option value="all">Wszystkie</option>
-              <option value="9kg">9kg</option>
-              <option value="8kg">8kg</option>
-              <option value="10.5kg">10.5kg</option>
-            </select>
+            <div className="relative">
+              <select
+                className="w-full px-3 py-2 bg-white text-text focus:outline-none transition-all duration-200 appearance-none cursor-pointer will-change-transform pr-8 shadow-sm font-sans"
+                value={filters.capacity}
+                onChange={e => updateFilter('capacity', e.target.value)}
+              >
+                <option value="all" className="bg-white text-text font-sans">
+                  Pokaż wszystkie
+                </option>
+                <option value="all" className="bg-white text-text font-sans">
+                  Wszystkie
+                </option>
+                <option value="9kg" className="bg-white text-text font-sans">
+                  9kg
+                </option>
+                <option value="8kg" className="bg-white text-text font-sans">
+                  8kg
+                </option>
+                <option value="10.5kg" className="bg-white text-text font-sans">
+                  10.5kg
+                </option>
+              </select>
+              <img
+                src={arrowIcon}
+                alt="dropdown arrow"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
+              />
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 };
-
-export default FilterSection;

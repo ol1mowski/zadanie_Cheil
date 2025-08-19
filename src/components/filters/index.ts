@@ -1,1 +1,1 @@
-export { default as FilterSection } from './FilterSection.component';
+export { FilterSection } from './FilterSection.component';

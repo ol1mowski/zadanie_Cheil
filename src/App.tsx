@@ -1,5 +1,5 @@
-import Header from './components/header/Header.components';
-import FilterSection from './components/filters/FilterSection.component';
+import { Header } from './components/header/Header.components';
+import { FilterSection } from './components/filters/FilterSection.component';
 
 function App() {
   return (
