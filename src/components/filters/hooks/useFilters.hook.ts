@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-export interface Filters {
+interface Filters {
   search: string;
   sortBy: string;
   functions: string;
@@ -8,16 +8,14 @@ export interface Filters {
   capacity: string;
 }
 
-const initialFilters: Filters = {
-  search: '',
-  sortBy: 'popularity',
-  functions: 'all',
-  energyClass: 'all',
-  capacity: 'all',
-};
-
 export const useFilters = () => {
-  const [filters, setFilters] = useState<Filters>(initialFilters);
+  const [filters, setFilters] = useState<Filters>({
+    search: '',
+    sortBy: 'popularity',
+    functions: 'all',
+    energyClass: 'all',
+    capacity: 'all',
+  });
 
   const updateFilter = useCallback((key: keyof Filters, value: string) => {
     setFilters(prev => ({
@@ -26,18 +24,5 @@ export const useFilters = () => {
     }));
   }, []);
 
-  const resetFilters = useCallback(() => {
-    setFilters(initialFilters);
-  }, []);
-
-  const applyFilters = useCallback(() => {
-    console.log('Applying filters:', filters);
-  }, [filters]);
-
-  return {
-    filters,
-    updateFilter,
-    resetFilters,
-    applyFilters,
-  };
+  return { filters, updateFilter };
 };

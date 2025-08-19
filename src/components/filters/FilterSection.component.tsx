@@ -13,7 +13,7 @@ export const FilterSection: React.FC = () => {
             <input
               type="text"
               placeholder="Search..."
-              className="w-full px-3 py-2 bg-white rounded-lg text-sm text-text placeholder-lightText focus:outline-none focus:ring-2 transition-all duration-200 will-change-transform"
+              className="w-full px-3 py-2 bg-white text-sm text-text placeholder-lightText focus:outline-none transition-all duration-200 will-change-transform"
               value={filters.search}
               onChange={e => updateFilter('search', e.target.value)}
             />
@@ -22,7 +22,7 @@ export const FilterSection: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="space-y-2">
-            <label className="block text-sm font-bold text-text">
+            <label className="block text-base font-bold text-text">
               Sortuj po:
             </label>
             <div className="relative">
@@ -56,10 +56,11 @@ export const FilterSection: React.FC = () => {
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
               />
             </div>
+            <p className="text-sm text-text mt-2">Liczba wyników: 23</p>
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-bold text-text">
+            <label className="block text-base font-bold text-text">
               Funkcje:
             </label>
             <div className="relative">
@@ -108,7 +109,7 @@ export const FilterSection: React.FC = () => {
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-bold text-text">
+            <label className="block text-base font-bold text-text">
               Klasa energetyczna:
             </label>
             <div className="relative">
@@ -142,7 +143,7 @@ export const FilterSection: React.FC = () => {
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-bold text-text">
+            <label className="block text-base font-bold text-text">
               Pojemność:
             </label>
             <div className="relative">
