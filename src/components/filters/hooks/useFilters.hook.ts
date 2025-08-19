@@ -51,7 +51,7 @@ export const useFilters = () => {
         );
       }
 
-      if (filters.functions !== 'all') {
+      if (filters.functions && filters.functions !== 'all') {
         filteredProducts = filteredProducts.filter(product =>
           product.features.some(feature => {
             switch (filters.functions) {
@@ -70,20 +70,20 @@ export const useFilters = () => {
         );
       }
 
-      if (filters.energyClass !== 'all') {
+      if (filters.energyClass && filters.energyClass !== 'all') {
         filteredProducts = filteredProducts.filter(
           product => product.energyClass === filters.energyClass
         );
       }
 
-      if (filters.capacity !== 'all') {
+      if (filters.capacity && filters.capacity !== 'all') {
         filteredProducts = filteredProducts.filter(
           product =>
             product.capacity.toString() === filters.capacity.replace('kg', '')
         );
       }
 
-      switch (filters.sortBy) {
+      switch (filters.sortBy || 'popularity') {
         case 'price':
           filteredProducts.sort((a, b) => a.price.amount - b.price.amount);
           break;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFilters } from './hooks/useFilters.hook';
 import arrowIcon from '@/assets/arrow.svg';
 import type { Product } from '@/data/products.data';
@@ -15,10 +15,43 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
   const { filters, updateFilter, filterAndSortProducts, isSearching } =
     useFilters();
 
+  const [openDropdowns, setOpenDropdowns] = useState({
+    sortBy: false,
+    functions: false,
+    energyClass: false,
+    capacity: false,
+  });
+
+  const toggleDropdown = (dropdownName: keyof typeof openDropdowns) => {
+    setOpenDropdowns(prev => ({
+      ...prev,
+      [dropdownName]: !prev[dropdownName],
+    }));
+  };
+
   useEffect(() => {
     const filteredProducts = filterAndSortProducts(products);
     onFiltersChange(filteredProducts);
   }, [filters, products]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (!target.closest('.filter-dropdown')) {
+        setOpenDropdowns({
+          sortBy: false,
+          functions: false,
+          energyClass: false,
+          capacity: false,
+        });
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <section className="w-full bg-background py-6 px-4">
@@ -62,38 +95,62 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
             <label className="block text-base font-bold text-text">
               Sortuj po:
             </label>
-            <div className="relative">
-              <select
-                className="w-full px-3 py-2 bg-white text-text focus:outline-none transition-all duration-200 appearance-none cursor-pointer will-change-transform pr-8 shadow-sm font-sans border-none"
-                value={filters.sortBy}
-                onChange={e => updateFilter('sortBy', e.target.value)}
+            <div className="relative filter-dropdown">
+              <div
+                className="w-full px-3 py-2 bg-white text-text cursor-pointer shadow-sm font-sans border-none"
+                onClick={() => toggleDropdown('sortBy')}
               >
-                <option
-                  value="popularity"
-                  selected
-                  hidden
-                  className="bg-white text-text font-sans cursor-pointer"
-                >
-                  Popularność
-                </option>
-                <option value="all" className="bg-white text-text font-sans">
-                  Wszystkie
-                </option>
-                <option value="price" className="bg-white text-text font-sans">
-                  Cena
-                </option>
-                <option
-                  value="capacity"
-                  className="bg-white text-text font-sans"
-                >
-                  Pojemność
-                </option>
-              </select>
-              <img
-                src={arrowIcon}
-                alt="dropdown arrow"
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
-              />
+                <div className="flex items-center justify-between">
+                  <span>
+                    {filters.sortBy === 'popularity'
+                      ? 'Popularność'
+                      : filters.sortBy === 'all'
+                        ? 'Wszystkie'
+                        : filters.sortBy === 'price'
+                          ? 'Cena'
+                          : filters.sortBy === 'capacity'
+                            ? 'Pojemność'
+                            : 'Wybierz'}
+                  </span>
+                  <img
+                    src={arrowIcon}
+                    alt="dropdown arrow"
+                    className="w-4 h-4 pointer-events-none"
+                  />
+                </div>
+              </div>
+
+              {openDropdowns.sortBy && (
+                <ul className="absolute top-full left-0 right-0 bg-white shadow-lg z-10 mt-1">
+                  <li
+                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      updateFilter('sortBy', 'all');
+                      toggleDropdown('sortBy');
+                    }}
+                  >
+                    Wszystkie
+                  </li>
+                  <li
+                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      updateFilter('sortBy', 'price');
+                      toggleDropdown('sortBy');
+                    }}
+                  >
+                    Cena
+                  </li>
+                  <li
+                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      updateFilter('sortBy', 'capacity');
+                      toggleDropdown('sortBy');
+                    }}
+                  >
+                    Pojemność
+                  </li>
+                </ul>
+              )}
             </div>
             <p className="text-sm text-text mt-2">Liczba wyników: 23</p>
           </div>
@@ -102,56 +159,73 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
             <label className="block text-base font-bold text-text">
               Funkcje:
             </label>
-            <div className="relative">
-              <select
-                className="w-full px-3 py-2 bg-white text-text focus:outline-none transition-all duration-200 appearance-none cursor-pointer will-change-transform pr-8 shadow-sm font-sans"
-                value={filters.functions}
-                onChange={e => updateFilter('functions', e.target.value)}
+            <div className="relative filter-dropdown">
+              <div
+                className="w-full px-3 py-2 bg-white text-text cursor-pointer shadow-sm font-sans border-none"
+                onClick={() => toggleDropdown('functions')}
               >
-                <option
-                  value="all"
-                  selected
-                  hidden
-                  className="bg-white text-text font-sans"
-                >
-                  Pokaż wszystkie
-                </option>
-                <option
-                  value="all"
-                  className="bg-white text-text font-sans cursor-pointer"
-                >
-                  Wszystkie
-                </option>
-                <option
-                  value="addwash"
-                  className="bg-white text-text font-sans"
-                >
-                  Drzwi AddWash
-                </option>
-                <option
-                  value="ai-control"
-                  className="bg-white text-text font-sans"
-                >
-                  Panel AI Control
-                </option>
-                <option
-                  value="inverter"
-                  className="bg-white text-text font-sans"
-                >
-                  Silnik inwerterowy
-                </option>
-                <option
-                  value="display"
-                  className="bg-white text-text font-sans"
-                >
-                  Wyświetlacz elektroniczny
-                </option>
-              </select>
-              <img
-                src={arrowIcon}
-                alt="dropdown arrow"
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
-              />
+                <div className="flex items-center justify-between">
+                  <span>
+                    {filters.functions === 'all'
+                      ? 'Pokaż wszystkie'
+                      : filters.functions === 'addwash'
+                        ? 'Drzwi AddWash'
+                        : filters.functions === 'ai-control'
+                          ? 'Panel AI Control'
+                          : filters.functions === 'inverter'
+                            ? 'Silnik inwerterowy'
+                            : filters.functions === 'display'
+                              ? 'Wyświetlacz elektroniczny'
+                              : 'Wybierz'}
+                  </span>
+                  <img
+                    src={arrowIcon}
+                    alt="dropdown arrow"
+                    className="w-4 h-4 pointer-events-none"
+                  />
+                </div>
+              </div>
+
+              {openDropdowns.functions && (
+                <ul className="absolute top-full left-0 right-0 bg-white shadow-lg z-10 mt-1">
+                  <li
+                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      updateFilter('functions', 'addwash');
+                      toggleDropdown('functions');
+                    }}
+                  >
+                    Drzwi AddWash
+                  </li>
+                  <li
+                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      updateFilter('functions', 'ai-control');
+                      toggleDropdown('functions');
+                    }}
+                  >
+                    Panel AI Control
+                  </li>
+                  <li
+                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      updateFilter('functions', 'inverter');
+                      toggleDropdown('functions');
+                    }}
+                  >
+                    Silnik inwerterowy
+                  </li>
+                  <li
+                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      updateFilter('functions', 'display');
+                      toggleDropdown('functions');
+                    }}
+                  >
+                    Wyświetlacz elektroniczny
+                  </li>
+                </ul>
+              )}
             </div>
           </div>
 
@@ -159,38 +233,62 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
             <label className="block text-base font-bold text-text">
               Klasa energetyczna:
             </label>
-            <div className="relative">
-              <select
-                className="w-full px-3 py-2 bg-white text-text focus:outline-none transition-all duration-200 appearance-none cursor-pointer will-change-transform pr-8 shadow-sm font-sans"
-                value={filters.energyClass}
-                onChange={e => updateFilter('energyClass', e.target.value)}
+            <div className="relative filter-dropdown">
+              <div
+                className="w-full px-3 py-2 bg-white text-text cursor-pointer shadow-sm font-sans border-none"
+                onClick={() => toggleDropdown('energyClass')}
               >
-                <option
-                  value="all"
-                  selected
-                  hidden
-                  className="bg-white text-text font-sans"
-                >
-                  Pokaż wszystkie
-                </option>
-                <option value="all" className="bg-white text-text font-sans">
-                  Wszystkie
-                </option>
-                <option value="A" className="bg-white text-text font-sans">
-                  A
-                </option>
-                <option value="B" className="bg-white text-text font-sans">
-                  B
-                </option>
-                <option value="D" className="bg-white text-text font-sans">
-                  D
-                </option>
-              </select>
-              <img
-                src={arrowIcon}
-                alt="dropdown arrow"
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
-              />
+                <div className="flex items-center justify-between">
+                  <span>
+                    {filters.energyClass === 'all'
+                      ? 'Pokaż wszystkie'
+                      : filters.energyClass === 'A'
+                        ? 'A'
+                        : filters.energyClass === 'B'
+                          ? 'B'
+                          : filters.energyClass === 'D'
+                            ? 'D'
+                            : 'Wybierz'}
+                  </span>
+                  <img
+                    src={arrowIcon}
+                    alt="dropdown arrow"
+                    className="w-4 h-4 pointer-events-none"
+                  />
+                </div>
+              </div>
+
+              {openDropdowns.energyClass && (
+                <ul className="absolute top-full left-0 right-0 bg-white shadow-lg z-10 mt-1">
+                  <li
+                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      updateFilter('energyClass', 'A');
+                      toggleDropdown('energyClass');
+                    }}
+                  >
+                    A
+                  </li>
+                  <li
+                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      updateFilter('energyClass', 'B');
+                      toggleDropdown('energyClass');
+                    }}
+                  >
+                    B
+                  </li>
+                  <li
+                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      updateFilter('energyClass', 'D');
+                      toggleDropdown('energyClass');
+                    }}
+                  >
+                    D
+                  </li>
+                </ul>
+              )}
             </div>
           </div>
 
@@ -198,38 +296,62 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
             <label className="block text-base font-bold text-text">
               Pojemność:
             </label>
-            <div className="relative">
-              <select
-                className="w-full px-3 py-2 bg-white text-text focus:outline-none transition-all duration-200 appearance-none cursor-pointer will-change-transform pr-8 shadow-sm font-sans"
-                value={filters.capacity}
-                onChange={e => updateFilter('capacity', e.target.value)}
+            <div className="relative filter-dropdown">
+              <div
+                className="w-full px-3 py-2 bg-white text-text cursor-pointer shadow-sm font-sans border-none"
+                onClick={() => toggleDropdown('capacity')}
               >
-                <option
-                  value="all"
-                  selected
-                  hidden
-                  className="bg-white text-text font-sans"
-                >
-                  Pokaż wszystkie
-                </option>
-                <option value="all" className="bg-white text-text font-sans">
-                  Wszystkie
-                </option>
-                <option value="9kg" className="bg-white text-text font-sans">
-                  9kg
-                </option>
-                <option value="8kg" className="bg-white text-text font-sans">
-                  8kg
-                </option>
-                <option value="10.5kg" className="bg-white text-text font-sans">
-                  10.5kg
-                </option>
-              </select>
-              <img
-                src={arrowIcon}
-                alt="dropdown arrow"
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
-              />
+                <div className="flex items-center justify-between">
+                  <span>
+                    {filters.capacity === 'all'
+                      ? 'Pokaż wszystkie'
+                      : filters.capacity === '9kg'
+                        ? '9kg'
+                        : filters.capacity === '8kg'
+                          ? '8kg'
+                          : filters.capacity === '10.5kg'
+                            ? '10.5kg'
+                            : 'Wybierz'}
+                  </span>
+                  <img
+                    src={arrowIcon}
+                    alt="dropdown arrow"
+                    className="w-4 h-4 pointer-events-none"
+                  />
+                </div>
+              </div>
+
+              {openDropdowns.capacity && (
+                <ul className="absolute top-full left-0 right-0 bg-white shadow-lg z-10 mt-1">
+                  <li
+                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      updateFilter('capacity', '9kg');
+                      toggleDropdown('capacity');
+                    }}
+                  >
+                    9kg
+                  </li>
+                  <li
+                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      updateFilter('capacity', '8kg');
+                      toggleDropdown('capacity');
+                    }}
+                  >
+                    8kg
+                  </li>
+                  <li
+                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      updateFilter('capacity', '10.5kg');
+                      toggleDropdown('capacity');
+                    }}
+                  >
+                    10.5kg
+                  </li>
+                </ul>
+              )}
             </div>
           </div>
         </div>
