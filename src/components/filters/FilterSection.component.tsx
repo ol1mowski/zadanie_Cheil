@@ -70,7 +70,9 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
               >
                 <option
                   value="popularity"
-                  className="bg-white text-text font-sans"
+                  selected
+                  hidden
+                  className="bg-white text-text font-sans cursor-pointer"
                 >
                   Popularność
                 </option>
@@ -106,10 +108,18 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
                 value={filters.functions}
                 onChange={e => updateFilter('functions', e.target.value)}
               >
-                <option value="all" className="bg-white text-text font-sans">
+                <option
+                  value="all"
+                  selected
+                  hidden
+                  className="bg-white text-text font-sans"
+                >
                   Pokaż wszystkie
                 </option>
-                <option value="all" className="bg-white text-text font-sans">
+                <option
+                  value="all"
+                  className="bg-white text-text font-sans cursor-pointer"
+                >
                   Wszystkie
                 </option>
                 <option
@@ -155,7 +165,12 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
                 value={filters.energyClass}
                 onChange={e => updateFilter('energyClass', e.target.value)}
               >
-                <option value="all" className="bg-white text-text font-sans">
+                <option
+                  value="all"
+                  selected
+                  hidden
+                  className="bg-white text-text font-sans"
+                >
                   Pokaż wszystkie
                 </option>
                 <option value="all" className="bg-white text-text font-sans">
@@ -189,7 +204,12 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
                 value={filters.capacity}
                 onChange={e => updateFilter('capacity', e.target.value)}
               >
-                <option value="all" className="bg-white text-text font-sans">
+                <option
+                  value="all"
+                  selected
+                  hidden
+                  className="bg-white text-text font-sans"
+                >
                   Pokaż wszystkie
                 </option>
                 <option value="all" className="bg-white text-text font-sans">
