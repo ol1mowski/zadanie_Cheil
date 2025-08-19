@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Header } from './components/header/Header.components';
 import { FilterSection } from './components/filters/FilterSection.component';
 import { Products } from './components/products/Products.component';
@@ -9,9 +9,9 @@ import type { Product } from './data/products.data';
 function App() {
   const [filteredProducts, setFilteredProducts] = useState(sampleProducts);
 
-  const handleFiltersChange = (newFilteredProducts: Product[]) => {
+  const handleFiltersChange = useCallback((newFilteredProducts: Product[]) => {
     setFilteredProducts(newFilteredProducts);
-  };
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">

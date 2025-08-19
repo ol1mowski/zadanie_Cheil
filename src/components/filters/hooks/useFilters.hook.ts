@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import type { Product } from '@/data/products.data';
 
 interface Filters {
@@ -18,6 +18,16 @@ export const useFilters = () => {
     capacity: 'all',
   });
 
+  const [debouncedSearch, setDebouncedSearch] = useState('');
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(filters.search);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [filters.search]);
+
   const updateFilter = useCallback((key: keyof Filters, value: string) => {
     setFilters(prev => ({
       ...prev,
@@ -29,15 +39,14 @@ export const useFilters = () => {
     (products: Product[]) => {
       let filteredProducts = [...products];
 
-      if (filters.search) {
+      if (debouncedSearch) {
+        const searchLower = debouncedSearch.toLowerCase();
         filteredProducts = filteredProducts.filter(
           product =>
-            product.model
-              .toLowerCase()
-              .includes(filters.search.toLowerCase()) ||
-            product.name.toLowerCase().includes(filters.search.toLowerCase()) ||
+            product.model.toLowerCase().includes(searchLower) ||
+            product.name.toLowerCase().includes(searchLower) ||
             product.features.some(feature =>
-              feature.toLowerCase().includes(filters.search.toLowerCase())
+              feature.toLowerCase().includes(searchLower)
             )
         );
       }
@@ -89,13 +98,45 @@ export const useFilters = () => {
 
       return filteredProducts;
     },
-    [filters]
+    [
+      debouncedSearch,
+      filters.functions,
+      filters.energyClass,
+      filters.capacity,
+      filters.sortBy,
+    ]
   );
+
+  const searchSuggestions = useMemo(() => {
+    return (products: Product[], maxSuggestions = 5) => {
+      if (!debouncedSearch || debouncedSearch.length < 2) return [];
+
+      const suggestions = new Set<string>();
+      const searchLower = debouncedSearch.toLowerCase();
+
+      products.forEach(product => {
+        if (product.model.toLowerCase().includes(searchLower)) {
+          suggestions.add(product.model);
+        }
+        if (product.name.toLowerCase().includes(searchLower)) {
+          suggestions.add(product.name);
+        }
+        product.features.forEach(feature => {
+          if (feature.toLowerCase().includes(searchLower)) {
+            suggestions.add(feature);
+          }
+        });
+      });
+
+      return Array.from(suggestions).slice(0, maxSuggestions);
+    };
+  }, [debouncedSearch]);
 
   return {
     filters,
     updateFilter,
     filterAndSortProducts,
-    filteredProductsCount: 0,
+    searchSuggestions,
+    isSearching: filters.search !== debouncedSearch,
   };
 };

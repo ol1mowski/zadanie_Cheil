@@ -1,4 +1,5 @@
 import React from 'react';
+import classEnergy from '@/assets/card.svg';
 
 interface ProductCardProps {
   product: {
@@ -90,9 +91,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
 
         <div className="flex items-center">
-          <span className="text-text text-sm">Klasa energetyczna</span>
-          <div className="bg-green text-white px-7 py-0 ml-2 relative">
-            <span className="text-sm">{product.energyClass}</span>
+          <span className="text-text text-sm">Klasa energetyczna:</span>
+          <div className="ml-2 flex items-center">
+            <div className="relative inline-block">
+              <img src={classEnergy} alt="class energy" />
+              <span className="absolute inset-0 flex items-center justify-start ml-1 text-white text-sm">
+                {product.energyClass}
+              </span>
+            </div>
           </div>
         </div>
       </div>
