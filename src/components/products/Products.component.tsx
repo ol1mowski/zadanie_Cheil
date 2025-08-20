@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { ProductCard } from './ProductCard.component';
+import { ProductCard } from './components/ProductCard.component';
 import { NoResults } from './components/NoResults.component';
 import { LoadMoreButton } from './components/LoadMoreButton.component';
 import { useSelectedProduct } from './hooks/useSelectedProduct.hook';

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { ProductCard } from '../ProductCard.component';
+import { ProductCard } from '../components/ProductCard.component';
 import type { Product } from '../types/products.types';
 
 const mockProduct: Product = {

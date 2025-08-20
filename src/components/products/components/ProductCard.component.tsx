@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
-import { ProductInfo } from './components/ProductInfo.component';
-import { ProductPrice } from './components/ProductPrice.component';
-import { EnergyClass } from './components/EnergyClass.component';
-import { SelectButton } from './components/SelectButton.component';
-import type { ProductCardProps } from './types/products.types';
+import { ProductInfo } from './ProductInfo.component';
+import { ProductPrice } from './ProductPrice.component';
+import { EnergyClass } from './EnergyClass.component';
+import { SelectButton } from './SelectButton.component';
+import type { ProductCardProps } from '../types/products.types';
 
 export const ProductCard: React.FC<ProductCardProps> = memo(
   ({ product, isSelected, onSelect }) => {
