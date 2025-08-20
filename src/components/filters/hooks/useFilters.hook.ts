@@ -1,13 +1,7 @@
 import { useState, useCallback, useEffect, useMemo } from 'react';
 import type { Product } from '@/data/products.data';
-
-interface Filters {
-  search: string;
-  sortBy: string;
-  functions: string;
-  energyClass: string;
-  capacity: string;
-}
+import type { Filters } from '@/components/filters/types/filters.types';
+import { getFilteredAndSortedProducts } from '@/components/filters/utils/filter.utils';
 
 export const useFilters = () => {
   const [filters, setFilters] = useState<Filters>({
@@ -37,74 +31,14 @@ export const useFilters = () => {
 
   const filterAndSortProducts = useCallback(
     (products: Product[]) => {
-      let filteredProducts = [...products];
+      const filtersWithDebouncedSearch = {
+        ...filters,
+        search: debouncedSearch,
+      };
 
-      if (debouncedSearch) {
-        const searchLower = debouncedSearch.toLowerCase();
-        filteredProducts = filteredProducts.filter(
-          product =>
-            product.model.toLowerCase().includes(searchLower) ||
-            product.name.toLowerCase().includes(searchLower) ||
-            product.features.some(feature =>
-              feature.toLowerCase().includes(searchLower)
-            )
-        );
-      }
-
-      if (filters.functions && filters.functions !== 'all') {
-        filteredProducts = filteredProducts.filter(product =>
-          product.features.some(feature => {
-            switch (filters.functions) {
-              case 'addwash':
-                return feature.includes('AddWash');
-              case 'ai-control':
-                return feature.includes('AI Control');
-              case 'inverter':
-                return feature.includes('inwerterowy');
-              case 'display':
-                return feature.includes('elektroniczny');
-              default:
-                return true;
-            }
-          })
-        );
-      }
-
-      if (filters.energyClass && filters.energyClass !== 'all') {
-        filteredProducts = filteredProducts.filter(
-          product => product.energyClass === filters.energyClass
-        );
-      }
-
-      if (filters.capacity && filters.capacity !== 'all') {
-        filteredProducts = filteredProducts.filter(
-          product =>
-            product.capacity.toString() === filters.capacity.replace('kg', '')
-        );
-      }
-
-      switch (filters.sortBy || 'popularity') {
-        case 'price':
-          filteredProducts.sort((a, b) => a.price.amount - b.price.amount);
-          break;
-        case 'capacity':
-          filteredProducts.sort((a, b) => a.capacity - b.capacity);
-          break;
-        case 'popularity':
-        default:
-          filteredProducts.sort((a, b) => parseInt(a.id) - parseInt(b.id));
-          break;
-      }
-
-      return filteredProducts;
+      return getFilteredAndSortedProducts(products, filtersWithDebouncedSearch);
     },
-    [
-      debouncedSearch,
-      filters.functions,
-      filters.energyClass,
-      filters.capacity,
-      filters.sortBy,
-    ]
+    [filters, debouncedSearch]
   );
 
   const searchSuggestions = useMemo(() => {
@@ -132,11 +66,23 @@ export const useFilters = () => {
     };
   }, [debouncedSearch]);
 
+  const resetFilters = useCallback(() => {
+    setFilters({
+      search: '',
+      sortBy: 'popularity',
+      functions: 'all',
+      energyClass: 'all',
+      capacity: 'all',
+    });
+    setDebouncedSearch('');
+  }, []);
+
   return {
     filters,
     updateFilter,
     filterAndSortProducts,
     searchSuggestions,
+    resetFilters,
     isSearching: filters.search !== debouncedSearch,
   };
 };
