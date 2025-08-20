@@ -12,7 +12,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
   isSearching,
 }) => {
   return (
-    <div className="mb-6 flex justify-center">
+    <div className="mb-6 flex justify-center" data-testid="search-container">
       <div className="relative w-full max-w-xs">
         <input
           type="text"
@@ -23,7 +23,10 @@ export const SearchInput: React.FC<SearchInputProps> = ({
         />
         {isSearching && (
           <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-            <div className="w-4 h-4 border-2 border-lightBlue border-t-transparent rounded-full animate-spin"></div>
+            <div
+              className="w-4 h-4 border-2 border-lightBlue border-t-transparent rounded-full animate-spin"
+              data-testid="search-spinner"
+            ></div>
           </div>
         )}
         {!isSearching && value && (
@@ -33,6 +36,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              data-testid="search-icon"
             >
               <path
                 strokeLinecap="round"

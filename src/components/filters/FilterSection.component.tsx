@@ -38,7 +38,11 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
   };
 
   return (
-    <section className="w-full bg-background py-6 px-4">
+    <section
+      className="w-full bg-background py-6 px-4"
+      role="region"
+      aria-label="Filtry produktów"
+    >
       <div className="container mx-auto max-w-6xl">
         <SearchInput
           value={filters.search}

@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useMemo } from 'react';
 import type { Product } from '@/data/products.data';
 import type { Filters } from '@/components/filters/types/filters.types';
-import { getFilteredAndSortedProducts } from '@/components/filters/utils/filter.utils';
+import { getFilteredAndSortedProducts } from '../utils/filter.utils';
 
 export const useFilters = () => {
   const [filters, setFilters] = useState<Filters>({
