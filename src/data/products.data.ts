@@ -57,12 +57,12 @@ export const sampleProducts: Product[] = [
   {
     id: '2',
     name: 'Pralka',
-    model: 'WW90T754ABT',
+    model: 'WW10T754ABT',
     features: [
       'Drzwi AddWash™',
       'Panel AI Control',
       'Silnik inwerterowy',
-      'Wyświetlacz elektroniczny',
+      'Funkcja parowa',
     ],
     capacity: 10.5,
     dimensions: {
@@ -70,14 +70,14 @@ export const sampleProducts: Product[] = [
       depth: 60,
       width: 55,
     },
-    energyClass: 'B',
+    energyClass: 'A',
     price: {
-      amount: 3199.0,
+      amount: 3899.0,
       currency: 'zł',
       validFrom: '2022-09-15',
       validTo: '2022-09-21',
       installment: {
-        monthlyAmount: 53.31,
+        monthlyAmount: 64.98,
         months: 60,
       },
     },
@@ -87,10 +87,9 @@ export const sampleProducts: Product[] = [
   {
     id: '3',
     name: 'Pralka',
-    model: 'WW90T754ABT',
+    model: 'WW8T754ABT',
     features: [
       'Drzwi AddWash™',
-      'Panel AI Control',
       'Silnik inwerterowy',
       'Wyświetlacz elektroniczny',
     ],
@@ -100,14 +99,14 @@ export const sampleProducts: Product[] = [
       depth: 60,
       width: 55,
     },
-    energyClass: 'C',
+    energyClass: 'A',
     price: {
-      amount: 3199.0,
+      amount: 2799.0,
       currency: 'zł',
       validFrom: '2022-09-15',
       validTo: '2022-09-21',
       installment: {
-        monthlyAmount: 53.31,
+        monthlyAmount: 46.65,
         months: 60,
       },
     },
@@ -117,12 +116,12 @@ export const sampleProducts: Product[] = [
   {
     id: '4',
     name: 'Pralka',
-    model: 'WW90T754ABT',
+    model: 'WW9T754ABT',
     features: [
-      'Drzwi AddWash™',
       'Panel AI Control',
       'Silnik inwerterowy',
       'Wyświetlacz elektroniczny',
+      'Funkcja prania szybkiego',
     ],
     capacity: 9,
     dimensions: {
@@ -130,14 +129,14 @@ export const sampleProducts: Product[] = [
       depth: 60,
       width: 55,
     },
-    energyClass: 'D',
+    energyClass: 'B',
     price: {
-      amount: 3199.0,
+      amount: 2899.0,
       currency: 'zł',
       validFrom: '2022-09-15',
       validTo: '2022-09-21',
       installment: {
-        monthlyAmount: 53.31,
+        monthlyAmount: 48.32,
         months: 60,
       },
     },
@@ -146,12 +145,12 @@ export const sampleProducts: Product[] = [
   {
     id: '5',
     name: 'Pralka',
-    model: 'WW90T754ABT',
+    model: 'WW10T754ABT',
     features: [
       'Drzwi AddWash™',
-      'Panel AI Control',
       'Silnik inwerterowy',
-      'Wyświetlacz elektroniczny',
+      'Funkcja parowa',
+      'Funkcja prania szybkiego',
     ],
     capacity: 10.5,
     dimensions: {
@@ -159,14 +158,14 @@ export const sampleProducts: Product[] = [
       depth: 60,
       width: 55,
     },
-    energyClass: 'E',
+    energyClass: 'B',
     price: {
-      amount: 3199.0,
+      amount: 3599.0,
       currency: 'zł',
       validFrom: '2022-09-15',
       validTo: '2022-09-21',
       installment: {
-        monthlyAmount: 53.31,
+        monthlyAmount: 59.98,
         months: 60,
       },
     },
@@ -175,12 +174,11 @@ export const sampleProducts: Product[] = [
   {
     id: '6',
     name: 'Pralka',
-    model: 'WW90T754ABT',
+    model: 'WW8T754ABT',
     features: [
-      'Drzwi AddWash™',
-      'Panel AI Control',
       'Silnik inwerterowy',
       'Wyświetlacz elektroniczny',
+      'Funkcja prania szybkiego',
     ],
     capacity: 8,
     dimensions: {
@@ -188,14 +186,14 @@ export const sampleProducts: Product[] = [
       depth: 60,
       width: 55,
     },
-    energyClass: 'F',
+    energyClass: 'C',
     price: {
-      amount: 3199.0,
+      amount: 2499.0,
       currency: 'zł',
       validFrom: '2022-09-15',
       validTo: '2022-09-21',
       installment: {
-        monthlyAmount: 53.31,
+        monthlyAmount: 41.65,
         months: 60,
       },
     },
