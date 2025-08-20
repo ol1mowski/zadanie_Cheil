@@ -1,9 +1,8 @@
 import { useState, useCallback } from 'react';
-import { Header } from './components/header/Header.components';
+import { Layout } from './components/layout/Layout.component';
 import { FilterSection } from './components/filters/FilterSection.component';
 import { Products } from './components/products/Products.component';
 import { sampleProducts } from './data/products.data';
-import { Footer } from './components/footer/Footer.component';
 import type { Product } from './data/products.data';
 
 function App() {
@@ -14,15 +13,13 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
+    <Layout>
       <FilterSection
         products={sampleProducts}
         onFiltersChange={handleFiltersChange}
       />
       <Products products={filteredProducts} />
-      <Footer />
-    </div>
+    </Layout>
   );
 }
 
