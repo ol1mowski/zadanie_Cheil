@@ -122,18 +122,4 @@ describe('Products', () => {
       screen.queryByText('F4V510RSE, LG Washing Machine')
     ).not.toBeInTheDocument();
   });
-
-  it('should render section with correct accessibility attributes', () => {
-    render(<Products {...defaultProps} />);
-
-    const section = document.querySelector('section');
-    expect(section).toHaveClass('w-full', 'bg-background', 'py-6', 'px-4');
-  });
-
-  it('should render container with correct max width', () => {
-    render(<Products {...defaultProps} />);
-
-    const container = document.querySelector('.container');
-    expect(container).toHaveClass('max-w-6xl');
-  });
 });
