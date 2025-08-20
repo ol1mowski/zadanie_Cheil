@@ -380,7 +380,7 @@ interface Product {
 
 ```bash
 # Clone repository
-git clone <repository-url>
+git clone https://github.com/ol1mowski/zadanie_Cheil.git
 cd zadanie-cheil
 
 # Install dependencies
@@ -454,7 +454,7 @@ This project is private and proprietary. All rights reserved.
 
 ## 👥 Team
 
-- **Developer**: [Your Name]
+- **Developer**: Oliwier Markiewicz
 - **Project**: Samsung Washing Machine Catalog
 - **Technology**: React + TypeScript + Vite
 - **Architecture**: Modern React with custom hooks and components
