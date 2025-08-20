@@ -8,7 +8,7 @@ interface ProductInfoProps {
 
 export const ProductInfo: React.FC<ProductInfoProps> = memo(({ product }) => {
   return (
-    <div className="space-y-1 mb-4">
+    <div className="mb-4">
       <div className="flex">
         <span className="text-text text-sm">Pojemność (kg):</span>
         <span className="font-bold text-text text-sm ml-2">

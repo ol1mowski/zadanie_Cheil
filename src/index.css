@@ -10,6 +10,11 @@
   body {
     @apply bg-background text-text;
   }
+
+  input::placeholder {
+    opacity: 1 !important;
+    color: inherit !important;
+  }
 }
 
 @layer components {

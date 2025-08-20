@@ -11,7 +11,7 @@ export const ProductPrice: React.FC<ProductPriceProps> = memo(({ product }) => {
 
   return (
     <div className="mb-6">
-      <p className="text-sm text-text mb-2">
+      <p className="text-sm text-text">
         Cena obowiązuje: {formatDate(product.price.validFrom)} -{' '}
         {formatDate(product.price.validTo)}
       </p>
@@ -22,7 +22,7 @@ export const ProductPrice: React.FC<ProductPriceProps> = memo(({ product }) => {
         <span className="text-lg text-text ml-1">{product.price.currency}</span>
       </div>
 
-      <p className="text-lg text-[#555] font-[500] text-text">
+      <p className="text-lg text-[#777] font-[500]">
         {product.price.installment.monthlyAmount.toFixed(2)}{' '}
         {product.price.currency} x {product.price.installment.months} rat
       </p>

@@ -8,7 +8,7 @@ interface EnergyClassProps {
 export const EnergyClass: React.FC<EnergyClassProps> = memo(
   ({ energyClass }) => {
     return (
-      <div className="flex items-center">
+      <div className="flex items-center mb-6">
         <span className="text-text text-sm">Klasa energetyczna:</span>
         <div className="ml-2 flex items-center">
           <div className="relative inline-block">

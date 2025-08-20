@@ -17,7 +17,7 @@ export const ProductCard: React.FC<ProductCardProps> = memo(
           />
         </div>
 
-        <div className="mb-4">
+        <div className="mb-12">
           <h3 className="text-xl font-bold text-text leading-tight">
             {product.model}, {product.name}
           </h3>

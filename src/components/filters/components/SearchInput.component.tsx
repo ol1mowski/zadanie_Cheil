@@ -17,7 +17,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
         <input
           type="text"
           placeholder="Search..."
-          className="w-full px-3 py-2 bg-white text-sm text-text placeholder-lightText focus:outline-none transition-all duration-200 will-change-transform pr-10"
+          className="w-full px-3 py-2 bg-white text-sm text-text outline-none duration-200 pr-10"
           value={value}
           onChange={e => onChange(e.target.value)}
         />
