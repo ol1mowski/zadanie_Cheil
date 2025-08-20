@@ -16,10 +16,14 @@ export const ProductPrice: React.FC<ProductPriceProps> = memo(({ product }) => {
         {formatDate(product.price.validTo)}
       </p>
 
-      <div className="flex items-baseline mb-2">
+      <div className="flex items-start mb-2">
         <span className="text-4xl font-bold">{mainPart}</span>
-        <span className="text-lg font-bold">{cents}</span>
-        <span className="text-lg text-text ml-1">{product.price.currency}</span>
+        <div className="flex flex-col items-start ml-2 pt-1">
+          <span className="text-md font-bold leading-none">{cents}</span>
+          <span className="text-md text-text font-[500] leading-none pl-1">
+            {product.price.currency}
+          </span>
+        </div>
       </div>
 
       <p className="text-lg text-[#777] font-[500]">
