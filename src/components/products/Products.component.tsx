@@ -23,7 +23,7 @@ export const Products: React.FC<ProductsProps> = memo(({ products }) => {
   };
 
   return (
-    <section className="w-full bg-background py-6 px-4">
+    <section className="w-full bg-background px-4">
       <div className="container mx-auto max-w-6xl">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map(product => (

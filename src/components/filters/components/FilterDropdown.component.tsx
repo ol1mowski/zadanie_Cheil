@@ -67,7 +67,7 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
         )}
       </div>
       {resultsCount !== undefined && (
-        <p className="text-sm text-text mt-2">Liczba wyników: {resultsCount}</p>
+        <p className="text-md text-text mt-2">Liczba wyników: {resultsCount}</p>
       )}
     </div>
   );
