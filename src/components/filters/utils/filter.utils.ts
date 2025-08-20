@@ -74,7 +74,7 @@ export const sortProducts = (
     case 'price':
       return sortedProducts.sort((a, b) => a.price.amount - b.price.amount);
     case 'capacity':
-      return sortedProducts.sort((a, b) => a.capacity - b.capacity);
+      return sortedProducts.sort((a, b) => b.capacity - a.capacity);
     case 'popularity':
     default:
       return sortedProducts.sort((a, b) => parseInt(a.id) - parseInt(b.id));
