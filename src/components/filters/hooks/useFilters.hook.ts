@@ -55,11 +55,36 @@ export const useFilters = () => {
         if (product.name.toLowerCase().includes(searchLower)) {
           suggestions.add(product.name);
         }
+
+        const fullTitle = `${product.model}, ${product.name} QuickDrive™, ${product.capacity} kg, biała`;
+        if (fullTitle.toLowerCase().includes(searchLower)) {
+          suggestions.add(fullTitle);
+        }
+
         product.features.forEach(feature => {
           if (feature.toLowerCase().includes(searchLower)) {
             suggestions.add(feature);
           }
         });
+
+        if (searchLower.includes('kg') || searchLower.includes('kilo')) {
+          suggestions.add(`${product.capacity} kg`);
+        }
+
+        if (
+          searchLower.includes('biała') ||
+          searchLower.includes('biały') ||
+          searchLower.includes('white')
+        ) {
+          suggestions.add('biała');
+        }
+
+        if (
+          searchLower.includes('quickdrive') ||
+          searchLower.includes('quick')
+        ) {
+          suggestions.add('QuickDrive™');
+        }
       });
 
       return Array.from(suggestions).slice(0, maxSuggestions);

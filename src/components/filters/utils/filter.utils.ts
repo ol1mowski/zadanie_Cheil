@@ -11,14 +11,40 @@ export const filterProductsBySearch = (
   if (!searchTerm) return products;
 
   const searchLower = searchTerm.toLowerCase();
-  return products.filter(
-    product =>
+  return products.filter(product => {
+    const basicMatch =
       product.model.toLowerCase().includes(searchLower) ||
       product.name.toLowerCase().includes(searchLower) ||
       product.features.some(feature =>
         feature.toLowerCase().includes(searchLower)
-      )
-  );
+      );
+
+    if (basicMatch) return true;
+
+    const fullTitle = `${product.model}, ${product.name} QuickDrive™, ${product.capacity} kg, biała`;
+    if (fullTitle.toLowerCase().includes(searchLower)) return true;
+
+    if (searchLower.includes('kg') || searchLower.includes('kilo')) {
+      const capacityNumber = searchLower.replace(/[^\d.]/g, '');
+      if (capacityNumber && product.capacity.toString() === capacityNumber) {
+        return true;
+      }
+    }
+
+    if (
+      searchLower === 'biała' ||
+      searchLower === 'biały' ||
+      searchLower === 'white'
+    ) {
+      return true;
+    }
+
+    if (searchLower === 'quickdrive' || searchLower === 'quick') {
+      return true;
+    }
+
+    return false;
+  });
 };
 
 export const filterProductsByFunction = (
